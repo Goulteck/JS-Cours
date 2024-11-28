@@ -1,43 +1,59 @@
-let fruits = []; 
+
+let fruits = [];
 
 
-const afficher = () => {
+function afficherFruits() {
   const tbody = document.getElementById("myTbody");
   tbody.innerHTML = ""; 
-  console.log("Tableau JS :", fruits); 
   
   
-  for (let fruit of fruits) {
-    const template = document.getElementById("templateTr"); 
-    const clone = template.content.cloneNode(true); 
-    let td = clone.querySelector("td");
-    td.textContent = fruit; 
-    let btn = clone.querySelector("button");
+  console.log("Contenu du tableau JS :", fruits);
+  
+  fruits.forEach((fruit, index) => {
     
+    const tr = document.createElement("tr");
+
     
-    btn.onclick = (event) => {
-      if (confirm("Voulez-vous enlever : " + fruit + " ?")) {
-        const indice = fruits.indexOf(fruit); 
-        if (indice > -1) {
-          fruits.splice(indice, 1); 
-          afficher(); 
-        }
-      }
-    };
+    const tdFruit = document.createElement("td");
+    tdFruit.textContent = fruit;
+
     
+    const tdAction = document.createElement("td");
+    const btnSupprimer = document.createElement("button");
+    btnSupprimer.textContent = "Supprimer";
+    btnSupprimer.onclick = () => supprimerFruit(index); 
+    tdAction.appendChild(btnSupprimer);
+
     
-    tbody.appendChild(clone);
-  }
-};
+    tr.appendChild(tdFruit);
+    tr.appendChild(tdAction);
+
+    
+    tbody.appendChild(tr);
+  });
+}
 
 
-document.getElementById("btnAjouter").onclick = () => {
-  let fruit = document.getElementById("fruit").value.trim(); 
-  if (fruit === "") {
-    alert("Veuillez entrer un nom de fruit valide.");
+function ajouterFruit() {
+  const input = document.getElementById("fruit");
+  const fruit = input.value.trim(); 
+  if (!fruit) {
+    alert("Veuillez entrer un fruit valide !");
     return;
   }
   fruits.push(fruit); 
-  document.getElementById("fruit").value = ""; 
-  afficher(); 
-};
+  input.value = ""; 
+  afficherFruits(); 
+}
+
+
+function supprimerFruit(index) {
+  const fruit = fruits[index];
+  if (confirm(`Êtes-vous sûr de vouloir supprimer "${fruit}" ?`)) {
+    fruits.splice(index, 1); 
+    afficherFruits(); 
+  }
+}
+
+
+document.getElementById("btnAjouter").addEventListener("click", ajouterFruit);
