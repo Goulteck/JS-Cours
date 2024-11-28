@@ -5,10 +5,10 @@ document.getElementById('btnCalculer').onclick = function () {
     div.classList.add('alert');
     div.classList.add('my-3');
   
-    // lecture des champs input
+    
     const poids = document.getElementById('poids').value;
     const taille = document.getElementById('taille').value;
-    // vider les champs input
+    
     document.getElementById('poids').value = '';
     document.getElementById('taille').value = '';
     const imc = poids / (taille * taille);
@@ -55,6 +55,6 @@ document.getElementById('btnCalculer').onclick = function () {
     div3.innerHTML = conseil;
     div.appendChild(div3);
   
-    resultat.innerHTML = ''; // je vide la balise
+    resultat.innerHTML = ''; 
     resultat.appendChild(div);
   };
