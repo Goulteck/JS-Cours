@@ -1,2 +1,2 @@
 # Formation JavaScript
-https://goulteck.github.io/JS-Cours/
+[Lien vers TP](https://goulteck.github.io/JS-Cours/)
